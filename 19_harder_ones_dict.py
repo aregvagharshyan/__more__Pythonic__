@@ -104,49 +104,15 @@ print(new_dict)
 
 nested_dict = {
     "a": {"b": {"c": {"d": 5}}},
-    "x": {"y": 10}
 }
-key = []
-length = 0
-max_depth = 0
-deepest_key = ""
-for k_1, v_1 in nested_dict.items():
-    if isinstance(v_1, dict):
-        key.append(k_1)
-        length += 1
-        key.append(length)
-        for k_2, v_2 in v_1.items():
-            if isinstance(v_2, dict):
-                key.append(k_2)
-                length += 1
-                key.append(length)
-                for k_3, v_3 in v_2.items():
-                    if isinstance(v_3, dict):
-                        key.append(k_3)
-                        length += 1
-                        key.append(length)
-                        for k_4, v_4 in v_3.items():
-                            if isinstance(v_4, dict):
-                                key.append(k_4)
-                                length += 1
-                                key.append(length)
-                                if length > max_depth:
-                                    max_depth = length
-                                    deepest_key = k_4
-                            else:
-                                if length > max_depth:
-                                    max_depth = length
-                                    deepest_key = k_4
-                    else:
-                        if length > max_depth:
-                            max_depth = length
-                            deepest_key = k_3
-            else:
-                if length > max_depth:
-                    max_depth = length
-                    deepest_key = k_2
-    else:
-        if length > max_depth:
-            max_depth = length
-            deepest_key = k_1
-print(f"Deepest key: {deepest_key}, Depth: {max_depth}")
+
+result = []
+stack = [nested_dict]
+while stack:
+    current = stack.pop()
+    for x, y in current.items():
+        if not isinstance(y, dict):
+            result.append(x)
+        elif isinstance(y, dict):
+            stack.append(y)
+print(result)
