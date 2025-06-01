@@ -467,3 +467,22 @@ def all_leaf_values(d):
             result.extend(all_leaf_values(y))
     return result
 print(all_leaf_values(data))
+
+#
+
+mixed = {"x": "hello", "y": [1, {"z": "world"}], "a": {"b": ["!"]}}
+def extract_strings(d):
+    result = []
+    for x, y in d.items():
+        if isinstance(y, str):
+            result.append(y)
+        elif isinstance(y, dict):
+            result.extend(extract_strings(y))
+        elif isinstance(y, list):
+            for i in y:
+                if isinstance(i, str):
+                    result.append(i)
+                elif isinstance(i, dict):
+                    result.extend(extract_strings(i))
+    return result
+print(extract_strings(mixed))
