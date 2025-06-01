@@ -468,6 +468,7 @@ def all_leaf_values(d):
     return result
 print(all_leaf_values(data))
 
+
 #
 
 mixed = {"x": "hello", "y": [1, {"z": "world"}], "a": {"b": ["!"]}}
